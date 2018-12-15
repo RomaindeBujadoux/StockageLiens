@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <h3 style="display: inline;">Bienvenue {{ app.user.username }}</h3>&nbsp&nbsp&nbsp<a href="{{ path('app_logout') }}">Déconnexion</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">
+        Accueil
+    </a>
+    <br>
+    <br>
+    <h3>
+        {{ link.nom }}
+    </h3>
+    <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d F Y')}}</p>
+    <br>
+    <p>
+        {{ link.description }}
+    </p>
+    <p>
+    <a href="{{ link.cible }}" target="_blank">
+        {{ link.cible }}
+    </a> &nbsp; <a href="{{ path('edit', {id : link.id}) }}">
+        Editer
+    {% if is_granted('ROLE_ADMIN') %}
+    </a> &nbsp; <a href="{{ path('delete', {id : link.id}) }}">
+        Supprimer
+    </a>
+    {% endif %}
+    </p>
+{% endblock %}

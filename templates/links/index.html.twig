@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h3 style="display: inline;">Bienvenue {{ app.user.username }}</h3>&nbsp&nbsp&nbsp<a href="{{ path('app_logout') }}">Déconnexion</a>
+    <br/>
+    <br/>
+    <br/>
+    <form method="get" action="{{ path('search') }}">
+		<input type="search" placeholder="Recherche" name="motcle">
+	</form>
+    <br/>
+    <a href="{{ path('add') }}">
+        Ajouter un lien
+    </a>    
+    {% for link in links %}
+        <div>
+	        <h3>
+	            <a href="{{ path("view", {id: link.id}) }}">
+	                {{ link.nom }}
+	            </a>
+	            <br/>    
+	            <a href="{{ link.cible }}" target="_blank">
+	                {{ link.cible }}
+	            </a>
+	        </h3>
+		        <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d F Y')}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+
