@@ -71,7 +71,7 @@ class User implements UserInterface
         $roles = $this->roles;
         $user = $this->username;
         
-        if ($user == 'DonJr') {
+        if ($user == 'Groupe2') {
         	$roles[] = 'ROLE_ADMIN';
         }
         else{
