@@ -47,4 +47,23 @@ class LinksRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    //Fonction de recherche selon tout ou parti du
+    //nom, de l'auteur ou de la date du lien.
+    public function SearchAction($motcle)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+           ->Select('l')
+           ->Where('l.Nom LIKE :nom')
+           ->orWhere('l.Auteur LIKE :auteur')
+           ->orWhere('l.Date_publi LIKE :date_publi')
+           ->setParameter('nom', '%'.$motcle.'%')
+           ->setParameter('auteur', '%'.$motcle.'%')
+           ->setParameter('date_publi', '%'.$motcle.'%');
+           
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

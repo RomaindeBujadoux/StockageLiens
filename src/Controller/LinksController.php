@@ -106,7 +106,9 @@ class LinksController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $motcle = $request->get('motcle');
 
-        $links = $em->getRepository(Links::class)->findBy( ['Nom' => $motcle]);
+        //Appelle à la fonction de recherche définie dans le repository
+        //en lui passant le mot clé saisi récupéré au-dessus
+        $links = $em->getRepository(Links::class)->SearchAction($motcle);
 
         return $this->render('links/index.html.twig', [
             'links' => $links,

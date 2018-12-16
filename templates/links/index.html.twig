@@ -2,12 +2,15 @@
 
 {% block body %}
 
-    <h3 style="display: inline;">Bienvenue {{ app.user.username }}</h3>&nbsp&nbsp&nbsp<a href="{{ path('app_logout') }}">Déconnexion</a>
+    <h3 style="display: inline;">Bienvenue {{ app.user.username }}</h3>&nbsp&nbsp&nbsp<a href="{{ path('app_logout') }}">Déconnexion</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">
+        Accueil
+    </a>
     <br/>
     <br/>
     <br/>
     <form method="get" action="{{ path('search') }}">
-		<input type="search" placeholder="Recherche" name="motcle">
+		<input type="search" placeholder="Recherche (pour les dates le format est aaaa-mm-jj ; ex:post du 8 décembre -> 12-08 ; post du 8 de chaque mois de 2018 -> 2018-%-08 )" name="motcle" style="width: 100%;">
+        <input type="submit" value="Rechercher" style="float: right;">
 	</form>
     <br/>
     <a href="{{ path('add') }}">
@@ -24,7 +27,7 @@
 	                {{ link.cible }}
 	            </a>
 	        </h3>
-		        <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d F Y')}}</p>
+		        <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d/m/Y')}}</p>
         </div>
     {% endfor %}
 {% endblock %}
