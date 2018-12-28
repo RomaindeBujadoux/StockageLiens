@@ -47,4 +47,21 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    //Fonction de recherche selon tout ou parti du
+    //nom ou de l'Id.
+    public function SearchUser($motcle)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+           ->Select('l')
+           ->Where('l.username LIKE :username')
+           ->orWhere('l.id LIKE :id')
+           ->setParameter('username', '%'.$motcle.'%')
+           ->setParameter('id', '%'.$motcle.'%');
+           
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

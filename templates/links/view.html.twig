@@ -16,14 +16,10 @@
         {{ link.description }}
     </p>
     <p>
-    <a href="{{ link.cible }}" target="_blank">
-        {{ link.cible }}
-    </a> &nbsp; <a href="{{ path('edit', {id : link.id}) }}">
-        Editer
-    {% if is_granted('ROLE_ADMIN') %}
-    </a> &nbsp; <a href="{{ path('delete', {id : link.id}) }}">
-        Supprimer
-    </a>
-    {% endif %}
+        <a href="{{ link.cible }}" target="_blank">{{ link.cible }}</a>&nbsp;
+        <a href="{{ path('edit', {id : link.id}) }}">Editer</a>&nbsp;
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('delete', {id : link.id}) }}">Supprimer</a>
+        {% endif %}
     </p>
 {% endblock %}

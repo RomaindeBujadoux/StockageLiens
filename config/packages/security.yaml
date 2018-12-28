@@ -16,6 +16,8 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        # On crée un pare-feu uniquement pour le formulaire
         main:
             anonymous: true
             guard:
@@ -38,5 +40,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+       - { path: ^/admin, roles: ROLE_ADMIN }
+      # - { path: ^/, roles: ROLE_USER }
