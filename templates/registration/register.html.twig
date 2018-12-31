@@ -1,9 +1,20 @@
-<h2>Formulaire d'inscription</h2>
-<br>
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+{% extends 'base.html.twig' %}
 
-    <button type="submit">S'enregistrer!</button>
-{{ form_end(form) }}
+{% block pagetitle %}Stockage de Liens - S'inscrire{% endblock %}
+
+{% block body %}
+<div class="container">
+	<h1 class="h2 mb-3 font-weight-normal">Formulaire d'inscription</h1>
+	{{ form_start(form) }}
+	    {{ form_row(form.username) }}
+	    {{ form_row(form.plainPassword.first) }}
+	    {{ form_row(form.plainPassword.second) }}
+	    <div class="form-group row">
+            <div class="col-sm-2"><a href="{{ path('app_login') }}">Retour</div>
+            <div class="col-sm-10">
+                <input type="submit" value="S'enregistrer" class="btn btn-primary" />
+            </div>
+        </div>
+	{{ form_end(form) }}
+</div>
+{% endblock %}

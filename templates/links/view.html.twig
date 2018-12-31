@@ -1,25 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block pagetitle %}Détail du Lien{% endblock %}
+
 {% block body %}
+    <div class="container">
+    <h5 style="display: inline;">Bienvenue {{ app.user.username }}</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn-sm">Déconnexion</a><span style="float: right; margin-right: 45px;"">{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('user_manage') }}">Gestion utilisateurs</a>{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">
+                Accueil
+            </a></span>
+    <br>
+    <br>
     
-    <h3 style="display: inline;">Bienvenue {{ app.user.username }}</h3>&nbsp&nbsp&nbsp<a href="{{ path('app_logout') }}">Déconnexion</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">
-        Accueil
-    </a>
-    <br>
-    <br>
-    <h3>
-        {{ link.nom }}
-    </h3>
-    <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d F Y')}}</p>
-    <br>
-    <p>
-        {{ link.description }}
-    </p>
-    <p>
-        <a href="{{ link.cible }}" target="_blank">{{ link.cible }}</a>&nbsp;
-        <a href="{{ path('edit', {id : link.id}) }}">Editer</a>&nbsp;
-        {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('delete', {id : link.id}) }}">Supprimer</a>
-        {% endif %}
-    </p>
+        <h1>
+            {{ link.nom }}
+        </h1>
+        <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d F Y')}}</p>
+        <br>
+        <p>
+            {{ link.description }}
+        </p>
+        <p>
+            <a href="{{ link.cible }}" target="_blank">{{ link.cible }}</a>&nbsp;
+            <a href="{{ path('edit', {id : link.id}) }}">Editer</a>&nbsp;
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('delete', {id : link.id}) }}">Supprimer</a>
+            {% endif %}
+        </p>
+    </div>
 {% endblock %}

@@ -1,35 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block pagetitle %}Espace de Stockage de Liens{% endblock %}
 
-    <h3 style="display: inline;">Bienvenue {{ app.user.username }}</h3>&nbsp&nbsp&nbsp<a href="{{ path('app_logout') }}">Déconnexion</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('user_manage') }}">Gestion utilisateurs</a>{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">
-        Accueil
-    </a>
+{% block body %}
+        <div class="container">
+            <h5 style="display: inline;">Bienvenue {{ app.user.username }}</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('app_logout') }}" class="btn btn-outline-primary btn-sm">Déconnexion</a><span style="float: right; margin-right: 45px;"">{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('user_manage') }}">Gestion utilisateurs</a>{% endif %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ path('home') }}">
+                Accueil
+            </a></span>
+       
     <br/>
     <br/>
     <br/>
-    <form method="post" action="{{ path('search') }}">
-		<input type="search" placeholder="Recherche (pour les dates le format est aaaa-mm-jj ; ex:post du 8 décembre -> 12-08 ; post du 8 de chaque mois de 2018 -> 2018-%-08 )" name="motcle" style="width: 100%;">
-        <input type="submit" value="Rechercher" style="float: right;">
-	</form>
-    <br/>
-    <a href="{{ path('add') }}">
-        Ajouter un lien
-    </a>    
-    {% for link in links %}
-        <div>
-	        <h3>
-	            <a href="{{ path("view", {id: link.id}) }}">
-	                {{ link.nom }}
-	            </a>
-	            <br/>    
-	            <a href="{{ link.cible }}" target="_blank">
-	                {{ link.cible }}
-	            </a>
-	        </h3>
-		        <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d/m/Y')}}</p>
+    
+        <h1 style="text-align: center;">Espace de Stockage de Liens</h1>
+        <h2 style="text-align: center;">Un lieu pour retrouver et partager tous vos liens</h2>
+        <form method="post" action="{{ path('search') }}">
+    		<input type="search" placeholder="Recherche ( pour les dates le format est aaaa-mm-jj ; ex:post du 8 décembre -> 12-08 ; post du 8 de chaque mois de 2018 -> 2018-%-08 )" name="motcle" style="width: 100%; text-align: center;">
+            <input type="submit" value="Rechercher" class="btn btn-primary float-right">
+    	</form>
+        <br/>
+        <br/>
+        <a href="{{ path('add') }}"  class="btn btn-primary float-right">
+            Ajouter un lien
+        </a>
+        <div style="padding-left: 300px">
+            {% for link in links %}
+        	        <h3>
+        	            <a href="{{ path("view", {id: link.id}) }}">
+        	                {{ link.nom }}
+        	            </a>
+        	            <br/>    
+        	            <a href="{{ link.cible }}" target="_blank">
+        	                {{ link.cible }}
+        	            </a>
+        	        </h3>
+        		        <p>Publié(e) par {{ link.auteur }} le {{link.datepubli|date('d/m/Y')}}</p>
+            {% endfor %}
         </div>
-    {% endfor %}
+        </div>  
 {% endblock %}
 
 
